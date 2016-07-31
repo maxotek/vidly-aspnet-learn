@@ -1,5 +1,23 @@
-﻿using System.Collections.Generic;
+﻿#region Copyright
+
+// Maxotek CONFIDENTIAL INFORMATION
+// © 2007-2016 Maxotek Inc.
+// All Rights Reserved
+//                                                                   
+// This program contains confidential and proprietary information   
+// of the Maxotek, Inc.  Any reproduction, disclosure, or use       
+// in whole or in part is expressly prohibited, except as may be    
+// specifically authorized by prior written agreement.
+
+#endregion
+
+#region Imports
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
+#endregion
 
 namespace vidly_aspnet_learn.Models
 {
@@ -18,7 +36,7 @@ namespace vidly_aspnet_learn.Models
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
@@ -31,6 +49,7 @@ namespace vidly_aspnet_learn.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -77,7 +96,8 @@ namespace vidly_aspnet_learn.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -96,7 +116,8 @@ namespace vidly_aspnet_learn.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
