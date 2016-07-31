@@ -13,8 +13,10 @@
 
 #region Imports
 
+using System.Collections.Generic;
 using System.Web.Mvc;
 using vidly_aspnet_learn.Models;
+using vidly_aspnet_learn.ViewModels;
 
 #endregion
 
@@ -29,7 +31,20 @@ namespace vidly_aspnet_learn.Controllers
             {
                 Name = "Shrek!"
             };
-            return View(movie);
+
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
+
+            var randomMovieViewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+            return View(randomMovieViewModel);
         }
 
         public ActionResult Edit(int id)
