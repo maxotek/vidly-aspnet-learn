@@ -48,6 +48,7 @@ namespace vidly_aspnet_learn.Controllers
             return Content(string.Format("pageIndex={0}, sortBy={1}", pageIndex, sortBy));
         }
 
+        [Route("movies/released/{year:range(2015,2016)}/{month:regex(\\d{2}):range(1,12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
