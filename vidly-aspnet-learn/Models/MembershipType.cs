@@ -13,15 +13,11 @@
 
 namespace vidly_aspnet_learn.Models
 {
-    public class Customer
+    public class MembershipType
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public bool IsSubscribedToNewsLetter { get; set; }
-
-        public MembershipType MembershipType { get; set; }
-
-        public byte MembershipTypeId { get; set; }
+        public byte Id { get; set; }
+        public short SignupFee { get; set; }
+        public byte DurationInMonths { get; set; }
+        public byte DiscountRate { get; set; }
     }
 }
