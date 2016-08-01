@@ -13,6 +13,7 @@
 
 #region Imports
 
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using vidly_aspnet_learn.Models;
@@ -38,7 +39,7 @@ namespace vidly_aspnet_learn.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = _context.Customers;
+            var customers = _context.Customers.Include(c => c.MembershipType);
             return View(customers);
         }
 
