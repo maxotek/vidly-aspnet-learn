@@ -57,11 +57,11 @@ namespace vidly_aspnet_learn.Controllers
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes;
-            var viewModel = new NewCustomerViewModel
+            var viewModel = new CustomerFormViewModel
             {
                 MembershipTypes = membershipTypes
             };
-            return View(viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
@@ -71,6 +71,20 @@ namespace vidly_aspnet_learn.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes
+            };
+            return View("CustomerForm", viewModel);
         }
     }
 }

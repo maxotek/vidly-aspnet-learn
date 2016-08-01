@@ -1,4 +1,4 @@
-﻿@model vidly_aspnet_learn.ViewModels.NewCustomerViewModel
+﻿@model vidly_aspnet_learn.ViewModels.CustomerFormViewModel
 
 @{
     ViewBag.Title = "New";
@@ -15,16 +15,16 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.BirthDate)
-        @Html.TextBoxFor(c => c.Customer.BirthDate, new {@class = "form-control"})
+        @Html.TextBoxFor(c => c.Customer.BirthDate, "{0:d MMM yyyy}", new {@class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.MembershipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new {@class = "form-control"})
     </div>
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsLetter) Subscribe to Newsletter
         </label>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(c => c.Customer.MembershipTypeId)
-        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new {@class = "form-control"})
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }
