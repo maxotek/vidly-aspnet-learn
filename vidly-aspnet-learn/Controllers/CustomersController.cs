@@ -52,5 +52,10 @@ namespace vidly_aspnet_learn.Controllers
 
             return View(customer);
         }
+
+        public ActionResult New()
+        {
+            return View();
+        }
     }
 }
