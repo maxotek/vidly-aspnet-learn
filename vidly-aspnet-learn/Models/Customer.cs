@@ -11,11 +11,20 @@
 
 #endregion
 
+#region Imports
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
+
 namespace vidly_aspnet_learn.Models
 {
     public class Customer
     {
         public int Id { get; set; }
+
+        [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
 
         public bool IsSubscribedToNewsLetter { get; set; }
