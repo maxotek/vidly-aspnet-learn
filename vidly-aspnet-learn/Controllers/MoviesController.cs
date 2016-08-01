@@ -14,6 +14,8 @@
 #region Imports
 
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using vidly_aspnet_learn.Models;
 using vidly_aspnet_learn.ViewModels;
@@ -24,6 +26,18 @@ namespace vidly_aspnet_learn.Controllers
 {
     public class MoviesController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET: Movies/Random
         public ActionResult Random()
         {
@@ -64,6 +78,16 @@ namespace vidly_aspnet_learn.Controllers
             return View(movies);
         }
 
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.Include(m => m.Genre).FirstOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            return View(movie);
+        }
+
         [Route("movies/released/{year:range(2015,2016)}/{month:regex(\\d{2}):range(1,12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
@@ -72,11 +96,7 @@ namespace vidly_aspnet_learn.Controllers
 
         public IEnumerable<Movie> GetMovies()
         {
-            return new List<Movie>
-            {
-                new Movie {Id = 1, Name = "Shrek"},
-                new Movie {Id = 2, Name = "Wall-e"}
-            };
+            return _context.Movies.Include(m => m.Genre);
         }
     }
 }
