@@ -1,7 +1,7 @@
-﻿#region Copyright
+#region Copyright
 
 // Maxotek CONFIDENTIAL INFORMATION
-// © 2007-2016 Maxotek Inc.
+// � 2007-2016 Maxotek Inc.
 // All Rights Reserved
 //                                                                   
 // This program contains confidential and proprietary information   
@@ -13,22 +13,22 @@
 
 #region Imports
 
-using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Migrations;
 
 #endregion
 
-namespace vidly_aspnet_learn.Models
+namespace vidly_aspnet_learn.Migrations
 {
-    public class MembershipType
+    public partial class AddNameToMembershipType : DbMigration
     {
-        public byte Id { get; set; }
+        public override void Up()
+        {
+            AddColumn("dbo.MembershipTypes", "Name", c => c.String(false, 255));
+        }
 
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
-
-        public short SignupFee { get; set; }
-        public byte DurationInMonths { get; set; }
-        public byte DiscountRate { get; set; }
+        public override void Down()
+        {
+            DropColumn("dbo.MembershipTypes", "Name");
+        }
     }
 }
