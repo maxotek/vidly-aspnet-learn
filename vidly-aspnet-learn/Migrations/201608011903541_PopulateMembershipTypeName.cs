@@ -19,19 +19,19 @@ using System.Data.Entity.Migrations;
 
 namespace vidly_aspnet_learn.Migrations
 {
-    public partial class PopulateMembershipTypes : DbMigration
+    public partial class PopulateMembershipTypeName : DbMigration
     {
         public override void Up()
         {
-            Sql("INSERT INTO MembershipTypes (Id, SignUpFee, DurationInMonths, DiscountRate) VALUES (1, 0, 0, 0)");
-            Sql("INSERT INTO MembershipTypes (Id, SignUpFee, DurationInMonths, DiscountRate) VALUES (2, 30, 1, 10)");
-            Sql("INSERT INTO MembershipTypes (Id, SignUpFee, DurationInMonths, DiscountRate) VALUES (3, 90, 3, 15)");
-            Sql("INSERT INTO MembershipTypes (Id, SignUpFee, DurationInMonths, DiscountRate) VALUES (4, 300, 12, 20)");
+            Sql("UPDATE MembershipTypes SET Name = 'Pay as you go' WHERE Id = 1");
+            Sql("UPDATE MembershipTypes SET Name = 'Monthly' WHERE Id = 2");
+            Sql("UPDATE MembershipTypes SET Name = 'Quarterly' WHERE Id = 3");
+            Sql("UPDATE MembershipTypes SET Name = 'Yeary' WHERE Id = 4");
         }
 
         public override void Down()
         {
-            Sql("DELETE FROM MembershipTypes WHERE Id IN (1, 2, 3, 4)");
+            Sql("UPDATE MembershipTypes SET Name = '' WHERE Id IN (1, 2, 3, 4)"); // can't set NULL
         }
     }
 }
