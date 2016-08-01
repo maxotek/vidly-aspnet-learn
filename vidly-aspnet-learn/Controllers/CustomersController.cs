@@ -17,6 +17,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using vidly_aspnet_learn.Models;
+using vidly_aspnet_learn.ViewModels;
 
 #endregion
 
@@ -55,7 +56,12 @@ namespace vidly_aspnet_learn.Controllers
 
         public ActionResult New()
         {
-            return View();
+            var membershipTypes = _context.MembershipTypes;
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View(viewModel);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace vidly_aspnet_learn.Models
 
         public MembershipType MembershipType { get; set; }
 
+        [DisplayName("Membership Type")]
         public byte MembershipTypeId { get; set; }
 
         [DisplayName("Date of Birth")]

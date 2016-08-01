@@ -44,6 +44,7 @@ namespace vidly_aspnet_learn.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
 
         public static ApplicationDbContext Create()
         {
