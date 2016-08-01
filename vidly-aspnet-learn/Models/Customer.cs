@@ -14,6 +14,7 @@
 #region Imports
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 #endregion
@@ -34,6 +35,7 @@ namespace vidly_aspnet_learn.Models
 
         public byte MembershipTypeId { get; set; }
 
+        [DisplayName("Date of Birth")]
         public DateTime? BirthDate { get; set; }
     }
 }
