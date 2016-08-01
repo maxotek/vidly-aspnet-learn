@@ -14,6 +14,7 @@
 #region Imports
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 #endregion
@@ -34,12 +35,14 @@ namespace vidly_aspnet_learn.Models
         public int GenreId { get; set; }
 
         [Required]
+        [DisplayName("Release Date")]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
         public DateTime DateAdded { get; set; }
 
         [Required]
+        [DisplayName("Number in Stock")]
         public short NumberInStock { get; set; }
     }
 }

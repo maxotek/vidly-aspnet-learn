@@ -1,11 +1,11 @@
 ﻿@model vidly_aspnet_learn.ViewModels.CustomerFormViewModel
 
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = Model.Customer == null ? "New Customer" : "Edit Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@(Model.Customer == null ? "New Customer" : "Edit Customer")</h2>
+<h2>@(ViewBag.Title)</h2>
 
 @using (Html.BeginForm("Save", "Customers"))
 {

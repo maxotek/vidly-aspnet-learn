@@ -13,6 +13,7 @@
 
 #region Imports
 
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -63,7 +64,16 @@ namespace vidly_aspnet_learn.Controllers
 
         public ActionResult Edit(int id)
         {
-            return Content("id=" + id);
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.Genres
+            };
+            return View("MovieForm", viewModel);
         }
 
         public ActionResult Index(int? pageIndex, string sortBy)
@@ -97,6 +107,38 @@ namespace vidly_aspnet_learn.Controllers
         public IEnumerable<Movie> GetMovies()
         {
             return _context.Movies.Include(m => m.Genre);
+        }
+
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0) //  New Customer
+            {
+                movie.DateAdded = DateTime.UtcNow;
+                _context.Movies.Add(movie);
+            }
+            else // Existing Customer
+            {
+                var movieInDb = _context.Movies.Single(c => c.Id == movie.Id);
+
+                //todo - use automapper
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberInStock = movie.NumberInStock;
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult New()
+        {
+            var genres = _context.Genres;
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+            return View("MovieForm", viewModel);
         }
     }
 }
