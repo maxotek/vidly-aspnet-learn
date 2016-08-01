@@ -65,9 +65,22 @@ namespace vidly_aspnet_learn.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0) //  New Customer
+            {
+                _context.Customers.Add(customer);
+            }
+            else // Existing Customer
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+                //todo - use automapper
+                customerInDb.Name = customer.Name;
+                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+            }
             _context.SaveChanges();
 
             return RedirectToAction("Index");
