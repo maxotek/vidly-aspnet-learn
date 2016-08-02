@@ -13,23 +13,28 @@
 
 #region Imports
 
-using AutoMapper;
-using vidly_aspnet_learn.Dtos;
-using vidly_aspnet_learn.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 #endregion
 
-namespace vidly_aspnet_learn.App_Start
+namespace vidly_aspnet_learn.Dtos
 {
-    public class MappingProfile : Profile
+    public class MovieDto
     {
-        public MappingProfile()
-        {
-            Mapper.CreateMap<Customer, CustomerDto>();
-            Mapper.CreateMap<CustomerDto, Customer>();
+        public int Id { get; set; }
 
-            Mapper.CreateMap<Movie, MovieDto>();
-            Mapper.CreateMap<MovieDto, Movie>();
-        }
+        [Required]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Required]
+        public int GenreId { get; set; }
+
+        [Required]
+        public DateTime ReleaseDate { get; set; }
+
+        [Range(1, 20)]
+        public short NumberInStock { get; set; }
     }
 }
