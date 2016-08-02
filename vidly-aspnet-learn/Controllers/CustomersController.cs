@@ -65,6 +65,7 @@ namespace vidly_aspnet_learn.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Save(Customer customer)
         {
