@@ -14,6 +14,8 @@
 #region Imports
 
 using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 #endregion
 
@@ -23,6 +25,10 @@ namespace vidly_aspnet_learn
     {
         public static void Register(HttpConfiguration config)
         {
+            var settings = config.Formatters.JsonFormatter.SerializerSettings;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            settings.Formatting = Formatting.Indented;
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
