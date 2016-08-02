@@ -24,7 +24,7 @@ namespace vidly_aspnet_learn.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var customer = (Customer) validationContext.ObjectInstance;
+            var customer = (ICustomer) validationContext.ObjectInstance;
 
             if (customer.MembershipTypeId == MembershipType.Unknown ||
                 customer.MembershipTypeId == MembershipType.PayAsYouGo)

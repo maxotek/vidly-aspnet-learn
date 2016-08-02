@@ -21,7 +21,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace vidly_aspnet_learn.Models
 {
-    public class Customer
+    public class Customer : ICustomer
     {
         public int Id { get; set; }
 
