@@ -19,6 +19,7 @@ using System.Web.Mvc;
 
 namespace vidly_aspnet_learn.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
