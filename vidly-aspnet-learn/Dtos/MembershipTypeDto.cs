@@ -13,29 +13,20 @@
 
 #region Imports
 
-using System;
 using System.ComponentModel.DataAnnotations;
-using vidly_aspnet_learn.Models;
 
 #endregion
 
 namespace vidly_aspnet_learn.Dtos
 {
-    public class CustomerDto : ICustomer
+    public class MembershipTypeDto
     {
-        public int Id { get; set; }
+        public byte Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter a customer name")]
-        [MaxLength(255)]
+        [Required]
+        [StringLength(255)]
         public string Name { get; set; }
 
-        public bool IsSubscribedToNewsLetter { get; set; }
-
-        public MembershipTypeDto MembershipType { get; set; }
-
-        public byte MembershipTypeId { get; set; }
-
-        [Min18YearIfMember]
-        public DateTime? BirthDate { get; set; }
+        public byte DiscountRate { get; set; }
     }
 }

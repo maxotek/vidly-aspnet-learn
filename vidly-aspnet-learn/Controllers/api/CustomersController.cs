@@ -13,6 +13,9 @@
 
 #region Imports
 
+#region Imports
+
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +24,8 @@ using System.Web.Http;
 using AutoMapper;
 using vidly_aspnet_learn.Dtos;
 using vidly_aspnet_learn.Models;
+
+#endregion
 
 #endregion
 
@@ -37,7 +42,7 @@ namespace vidly_aspnet_learn.Controllers.api
 
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.Select(Mapper.Map<Customer, CustomerDto>);
+            return _context.Customers.Include(c => c.MembershipType).Select(Mapper.Map<Customer, CustomerDto>);
         }
 
         public IHttpActionResult GetCustomer(int id)

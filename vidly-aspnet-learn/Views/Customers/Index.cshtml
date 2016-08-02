@@ -1,6 +1,4 @@
-﻿@model IEnumerable<vidly_aspnet_learn.Models.Customer>
-
-@{
+﻿@{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,43 +9,52 @@
     @Html.ActionLink("New", "New", null, new {@class = "btn btn-primary"})
 </p>
 
-@if (!Model.Any())
-{
-    <text>We don't have any customers yet</text>
-}
-else
-{
-    <table id="customers-table" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Customer</th>
-            <th>Membership Type</th>
-            <th>Discount Rate</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new {id = customer.Id}, null)</td>
-                <td>@customer.MembershipType.Name</td>
-                <td>@customer.MembershipType.DiscountRate%</td>
-                <th>
-                    <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
-                </th>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+<table id="customers-table" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Customer</th>
+        <th>Membership Type</th>
+        <th>Discount Rate</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
 @section scripts
 {
     <script>
         $(document)
             .ready(function() {
-                $("#customers-table").DataTable();
+                $("#customers-table")
+                    .DataTable({
+                        ajax: {
+                            url: "/api/customers",
+                            dataSrc: ""
+                        },
+                        columns: [
+                            {
+                                data: "name",
+                                render: function(data, type, customer) {
+                                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                                }
+                            },
+                            {
+                                data: "membershipType.name"
+                            },
+                            {
+                                data: "membershipType.discountRate"
+                            },
+                            {
+                                data: "id",
+                                render: function(data) {
+                                    return "<button class='btn-link js-delete' data-customer-id='" +
+                                        data +
+                                        "'>Delete</button>";
+                                }
+                            }
+                        ]
+                    });
 
                 $("#customers-table")
                     .on("click",
