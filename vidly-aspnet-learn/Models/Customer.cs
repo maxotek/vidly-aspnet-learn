@@ -25,7 +25,7 @@ namespace vidly_aspnet_learn.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a customer name")]
         [MaxLength(255)]
         public string Name { get; set; }
 
