@@ -59,6 +59,7 @@ namespace vidly_aspnet_learn.Controllers
             var membershipTypes = _context.MembershipTypes;
             var viewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipTypes
             };
             return View("CustomerForm", viewModel);
