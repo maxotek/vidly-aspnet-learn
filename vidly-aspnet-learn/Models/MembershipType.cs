@@ -21,6 +21,8 @@ namespace vidly_aspnet_learn.Models
 {
     public class MembershipType
     {
+        public const byte Unknown = 0;
+        public const byte PayAsYouGo = 1;
         public byte Id { get; set; }
 
         [Required]
