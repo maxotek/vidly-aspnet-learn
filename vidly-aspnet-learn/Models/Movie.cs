@@ -43,6 +43,7 @@ namespace vidly_aspnet_learn.Models
 
         [Required]
         [DisplayName("Number in Stock")]
+        [Range(1, 20)]
         public short NumberInStock { get; set; }
     }
 }

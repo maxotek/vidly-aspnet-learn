@@ -109,8 +109,20 @@ namespace vidly_aspnet_learn.Controllers
             return _context.Movies.Include(m => m.Genre);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel
+                {
+                    Movie = movie,
+                    Genres = _context.Genres
+                };
+                return View("MovieForm", viewModel);
+            }
+
             if (movie.Id == 0) //  New Customer
             {
                 movie.DateAdded = DateTime.UtcNow;
