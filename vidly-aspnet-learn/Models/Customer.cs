@@ -37,6 +37,7 @@ namespace vidly_aspnet_learn.Models
         public byte MembershipTypeId { get; set; }
 
         [DisplayName("Date of Birth")]
+        [Min18YearIfMember]
         public DateTime? BirthDate { get; set; }
     }
 }
