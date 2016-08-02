@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -37,7 +38,7 @@ namespace vidly_aspnet_learn.Controllers.api
 
         public IEnumerable<MovieDto> GetMovies()
         {
-            return _context.Movies.Select(Mapper.Map<Movie, MovieDto>);
+            return _context.Movies.Include(m => m.Genre).Select(Mapper.Map<Movie, MovieDto>);
         }
 
         public IHttpActionResult GetMovie(int id)

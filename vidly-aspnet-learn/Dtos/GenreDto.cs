@@ -13,30 +13,18 @@
 
 #region Imports
 
-using System;
 using System.ComponentModel.DataAnnotations;
 
 #endregion
 
 namespace vidly_aspnet_learn.Dtos
 {
-    public class MovieDto
+    public class GenreDto
     {
         public int Id { get; set; }
 
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-
-        public GenreDto Genre { get; set; }
-
-        [Required]
-        public int GenreId { get; set; }
-
-        [Required]
-        public DateTime ReleaseDate { get; set; }
-
-        [Range(1, 20)]
-        public short NumberInStock { get; set; }
     }
 }
