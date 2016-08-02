@@ -13,25 +13,23 @@
 
 #region Imports
 
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 
 #endregion
 
 namespace vidly_aspnet_learn
 {
-    public class MvcApplication : HttpApplication
+    public static class WebApiConfig
     {
-        protected void Application_Start()
+        public static void Register(HttpConfiguration config)
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new {id = RouteParameter.Optional}
+                );
         }
     }
 }
