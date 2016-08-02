@@ -68,9 +68,8 @@ namespace vidly_aspnet_learn.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel(movie)
             {
-                Movie = movie,
                 Genres = _context.Genres
             };
             return View("MovieForm", viewModel);
@@ -115,9 +114,8 @@ namespace vidly_aspnet_learn.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MovieFormViewModel
+                var viewModel = new MovieFormViewModel(movie)
                 {
-                    Movie = movie,
                     Genres = _context.Genres
                 };
                 return View("MovieForm", viewModel);
