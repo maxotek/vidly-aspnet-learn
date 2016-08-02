@@ -47,8 +47,9 @@ else
     <script>
         $(document)
             .ready(function() {
-                $("#customers-table .js-delete")
+                $("#customers-table")
                     .on("click",
+                        ".js-delete",
                         function() {
                             var button = $(this);
 
