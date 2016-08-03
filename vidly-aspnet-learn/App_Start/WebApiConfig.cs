@@ -30,6 +30,7 @@ namespace vidly_aspnet_learn
             settings.Formatting = Formatting.Indented;
 
             config.MapHttpAttributeRoutes();
+            config.Filters.Add(new AuthorizeAttribute());
 
             config.Routes.MapHttpRoute(
                 "DefaultApi",
